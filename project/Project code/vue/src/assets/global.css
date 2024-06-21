@@ -1,0 +1,10 @@
+/*去除了默认的样式*/
+body {
+    margin:0;/*消除了空白间距*/
+    padding:0;
+    background-color: #eee;/*浅灰色*/
+}
+*{
+    /*建一个盒状模型，这样外间距不会单独占一个像素*/
+    box-sizing: border-box;
+}

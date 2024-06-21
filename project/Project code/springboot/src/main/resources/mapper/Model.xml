@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.ModelMapper">
+
+    <select id="listByCondition" resultType="com.example.springboot.entity.Model">
+        select * from model
+        <where>
+            <if test="modelName != null and modelName != '' ">
+                name = #{modelName}
+            </if>
+            <if test="task != null and task != '' ">
+                and task = #{task}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>

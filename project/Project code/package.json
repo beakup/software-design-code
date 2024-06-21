@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "node-sass": "^9.0.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^14.1.1"
+  },
+  "dependencies": {
+    "echarts": "^5.5.0",
+    "html2canvas": "^1.4.1"
+  }
+}

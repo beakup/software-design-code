@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.ResultHistoryMapper">
+
+    <insert id="save">
+        insert into result_history(patient_id,model_name,data_set,input_url,task,inform,createtime)
+        values(#{patientId},#{modelName},#{dataSet},#{inputUrl},#{task},#{inform},#{createtime})
+    </insert>
+
+    <delete id="deleteById">
+        delete from result_history
+        where id = #{id}
+    </delete>
+
+    <select id="getById" resultType="com.example.springboot.entity.ResultHistory">
+        select * from result_history
+        where id = #{id}
+    </select>
+
+    <select id="listByCondition" resultType="com.example.springboot.entity.ResultHistory">
+        select * from result_history
+        <where>
+            <if test="start != null and start != '' ">
+                createtime &gt;= #{start}
+            </if>
+            <if test="end != null and end != '' ">
+                and createtime &lt;= #{end}
+            </if>
+            <if test="inform != null and inform != '' ">
+                and (data_set like concat('%',#{inform},'%') or model_name like concat('%',#{inform},'%') or
+                     task like concat('%',#{inform},'%')  )
+            </if>
+        </where>
+
+        <if test="orderField1 !=null and orderField1 != '' ">
+            order by ${orderField1} ${orderType}, ${orderField2},model_name,data_set
+        </if>
+    </select>
+
+</mapper>

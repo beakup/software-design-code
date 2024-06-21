@@ -1,0 +1,45 @@
+#后端操作与前段不同，都需要重启，前段会自动刷新
+server:
+  ip: localhost
+  port: 9090 #与其他端口区分开
+
+spring: #数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/challengecup?useSSL=false&serverTimezone=GMT&useUnicode=true&characterEncoding=utf8 #北京时间，MySQL以3306为默认端口
+    username: root
+    password: *
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 500MB
+#      enabled: true
+#      location: F:\ChallengeCup\project\Project code\image_temp
+
+  redis:
+    # Redis本地服务器地址，注意要开启redis服务，即那个redis-server.exe
+    host: 127.0.0.1
+    # Redis服务器端口,默认为6379.若有改动按改动后的来
+    port: 6379
+    #Redis服务器连接密码，默认为空，若有设置按设置的来
+    password:
+    jedis:
+      pool:
+        # 连接池最大连接数，若为负数则表示没有任何限制
+        max-active: 8
+        # 连接池最大阻塞等待时间，若为负数则表示没有任何限制
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 8
+
+
+mybatis: #所有.xml结尾的文件都配置进来
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+files:
+  upload:
+    path: imageFiles/

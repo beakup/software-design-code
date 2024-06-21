@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.UserEdgeMapper">
+
+    <insert id="save">
+        insert into userEdge(name,username,phone,address,password,cover,email,occupation,workplace)
+        values(#{name},#{username},#{phone},#{address},#{password},#{cover},#{email},#{occupation},#{workplace})
+    </insert>
+
+    <update id="updateById">
+        update userEdge set name = #{name},age = #{age},
+                            sex = #{sex},phone = #{phone},
+                            address = #{address},cover = #{cover},
+                            email = #{email},occupation=#{occupation},
+                            workplace=#{workplace},updatetime = #{updatetime}
+        where id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        update userEdge set password = #{newPass} where name = #{name} and password = #{password}
+    </update>
+
+    <delete id="deleteById">
+        delete from userEdge where id =#{id}
+    </delete>
+
+    <select id="list" resultType="com.example.springboot.entity.UserEdge">
+        select * from userEdge order by id desc
+    </select>
+
+    <select id="listByCondition" resultType="com.example.springboot.entity.UserEdge">
+        select * from userEdge
+            <where>
+                <if test="name != null and name != '' ">
+                    username like concat('%',#{ username },'%')
+                </if>
+                <if test="phone != null and phone != '' ">
+                    and phone like concat('%',#{ phone },'%')
+                </if>
+            </where>
+        order by id desc
+    </select>
+    <select id="getById" resultType="com.example.springboot.entity.UserEdge">
+        select * from userEdge where id = #{id}
+    </select>
+
+    <select id="getByUserId" resultType="com.example.springboot.entity.UserEdge">
+        select * from userEdge where id = #{id}
+    </select>
+
+    <select id="getBynameAndPassword" resultType="com.example.springboot.entity.UserEdge">
+        select * from userEdge where name = #{name} and password = #{password}
+    </select>
+    <select id="getByname" resultType="com.example.springboot.entity.UserEdge">
+        select * from userEdge where name = #{name}
+    </select>
+
+</mapper>
